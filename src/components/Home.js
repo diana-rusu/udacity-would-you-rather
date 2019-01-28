@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Tabs, Tab } from 'react-bootstrap';
+import Question from './Question'
 
 class Home extends Component {
     render () {
-        console.log(this.props)
         return (
-            <div>
-                Home
-            </div>
+        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+        <Tab eventKey={1} title="Answered Questions">
+            <ul>
+                {this.props.questionIds.map((id) =>(
+                    <li key={id}>
+                        {/* <div> Question ID: {id}</div> */}
+                        <Question id={id} />
+                    </li>
+                ))}
+            </ul>
+        </Tab>
+        <Tab eventKey={2} title="Unanswered Questions">
+            Tab 2 content
+        </Tab>
+        </Tabs>
         )
     }
 }
