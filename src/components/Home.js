@@ -4,29 +4,55 @@ import { Tabs, Tab } from 'react-bootstrap';
 import Question from './Question'
 
 class Home extends Component {
+    state = {
+        answered: null,
+        unanswered: null
+    }
+    componentWillMount () {
+        let answeredIds = []
+        this.props.questionIds.filter( (questionID) => {
+            let question = this.props.questions[questionID]
+            for ( let vote in question.optionOne.votes) {
+                if (question.optionOne.votes[vote] === this.props.authedUser || question.optionTwo.votes[vote]  === this.props.authedUser) {
+                    answeredIds.push(questionID)
+                }
+            }
+        })
+        this.setState(() => ({
+            answered: answeredIds, 
+            unanswered: this.props.questionIds.filter(f => !answeredIds.includes(f))
+        }))
+    }
     render () {
         return (
         <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-        <Tab eventKey={1} title="Answered Questions">
-            <ul>
-                {this.props.questionIds.map((id) =>(
-                    <li key={id}>
-                        {/* <div> Question ID: {id}</div> */}
-                        <Question id={id} />
-                    </li>
-                ))}
-            </ul>
-        </Tab>
-        <Tab eventKey={2} title="Unanswered Questions">
-            Tab 2 content
-        </Tab>
+            <Tab eventKey={1} title="Answered Questions">
+                <ul>
+                {this.state.answered.map((id) =>(
+                        <li key={id}>
+                            <Question id={id} />
+                        </li>
+                    ))}
+                </ul>
+            </Tab>
+            <Tab eventKey={2} title="Unanswered Questions">
+                <ul>
+                    {this.state.unanswered.map((id) =>(
+                        <li key={id}>
+                            <Question id={id} />
+                        </li>
+                    ))}
+                </ul>
+            </Tab>
         </Tabs>
         )
     }
 }
 
-function mapStateToProps ({questions}) {
+function mapStateToProps ({authedUser, questions}) {
     return {
+        authedUser,
+        questions,
         questionIds: Object.keys(questions)
         .sort((a,b) => questions[b].timestamp - questions[a].timestamp) 
     }

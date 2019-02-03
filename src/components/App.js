@@ -2,8 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import Home from './Home'
+import Login from './Login'
+import Logout from './Logout'
 import Nav from './Nav'
+import ViewPoll from './ViewPoll'
+import Leaderboard from './Leaderboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import NewQuestion from './NewQuestion'
 
 class App extends React.Component {
     componentDidMount(){
@@ -17,9 +22,13 @@ class App extends React.Component {
         { this.props.loading === true
         ? null
         : <div>
-          <Route path='/' exact component={Home} />
-          {/* <Route path='/new' component={NewQuestion} />
-          <Route path='/question/:id' component={QuestionPage} />  */}
+          <Route path='/' exact component={Home} /> 
+          <Route path='/login' exact component={Login} />
+          <Route path='/new' component={NewQuestion} />
+          <Route path='/logout' component={Logout} />
+          <Route path='/viewpoll' component={ViewPoll} />
+          <Route path='/leaderboard' component={Leaderboard} />
+          {/* <Route path='/question/:id' component={QuestionPage} />  */}
         </div> }
         </div>
       </Router>

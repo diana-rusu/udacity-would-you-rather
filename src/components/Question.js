@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { formatQuestionUser, formatDate } from '../utils/helpers'
+import Button from 'react-bootstrap/Button'
 
 class Question extends Component {
     
@@ -25,7 +26,7 @@ class Question extends Component {
                     </span>
                     <h3>Would you rather</h3>
                     <div>{optionOne.text}</div>
-                    <button>View Poll</button>
+                    <Button>View Poll</Button>
                 </div>
             </div>
         )
