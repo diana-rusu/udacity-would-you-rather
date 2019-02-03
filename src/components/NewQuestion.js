@@ -29,9 +29,6 @@ class NewQuestion extends Component{
     render() {
         const { text1, text2 } = this.state
         return (
-            // <div>
-            //     aaa
-            // </div>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="option1">
                     <Form.Label>Option 1</Form.Label>

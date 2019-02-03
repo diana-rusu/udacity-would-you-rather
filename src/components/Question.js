@@ -3,16 +3,18 @@ import { connect } from 'react-redux'
 
 import { formatQuestionUser, formatDate } from '../utils/helpers'
 import Button from 'react-bootstrap/Button'
+import { withRouter } from 'react-router-dom'
 
 class Question extends Component {
-    
+    onClick(e, id) {
+        e.preventDefault();
+        this.props.history.push(`/viewpoll/${id}`);
+    }
     render() {
-        console.log('PROPS', this.props)
         const { question } = this.props
         const {
             name, avatar, timestamp, optionOne, optionTwo, id
         } = question
-        console.log('AVATAR:', question)
         return (
             <div className='question'>
                 <img src={avatar}
@@ -26,7 +28,7 @@ class Question extends Component {
                     </span>
                     <h3>Would you rather</h3>
                     <div>{optionOne.text}</div>
-                    <Button>View Poll</Button>
+                    <Button variant="primary" onClick={(e) => this.onClick(e,id)}>View Poll</Button>
                 </div>
             </div>
         )
@@ -43,4 +45,4 @@ function mapStateToProps ({authedUser, users, questions}, {id}) {
     }
 }
 
-export default connect(mapStateToProps)(Question)
+export default withRouter(connect(mapStateToProps)(Question))

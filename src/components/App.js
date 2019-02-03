@@ -6,6 +6,7 @@ import Login from './Login'
 import Logout from './Logout'
 import Nav from './Nav'
 import ViewPoll from './ViewPoll'
+import ViewPollResults from './ViewPollResults'
 import Leaderboard from './Leaderboard'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import NewQuestion from './NewQuestion'
@@ -26,7 +27,8 @@ class App extends React.Component {
           <Route path='/login' exact component={Login} />
           <Route path='/new' component={NewQuestion} />
           <Route path='/logout' component={Logout} />
-          <Route path='/viewpoll' component={ViewPoll} />
+          <Route path='/viewpoll/:id' component={ViewPoll} />
+          <Route path='/viewpollresults/:id' component={ViewPollResults} />
           <Route path='/leaderboard' component={Leaderboard} />
           {/* <Route path='/question/:id' component={QuestionPage} />  */}
         </div> }
