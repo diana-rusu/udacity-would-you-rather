@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import Card  from 'react-bootstrap/Card'
-import Button  from 'react-bootstrap/Button'
-import Form  from 'react-bootstrap/Form'
 import ProgressBar  from 'react-bootstrap/ProgressBar'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { formatQuestionUser, formatDate } from '../utils/helpers'
 
 class ViewPollResults extends Component {
     render() {
