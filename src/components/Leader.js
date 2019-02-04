@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Card  from 'react-bootstrap/Card'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 

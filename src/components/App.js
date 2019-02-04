@@ -4,7 +4,7 @@ import { handleInitialData } from '../actions/shared'
 import Home from './Home'
 import Login from './Login'
 import Logout from './Logout'
-import Nav from './Nav'
+import NavComp from './NavComp'
 import ViewPoll from './ViewPoll'
 import ViewPollResults from './ViewPollResults'
 import Leaderboard from './Leaderboard'
@@ -19,7 +19,8 @@ class App extends React.Component {
       return (
       <Router>
         <div className='container'>
-        <Nav />
+        <NavComp />
+        <br />
         { this.props.loading === true
         ? null
         : <div>
