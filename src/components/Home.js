@@ -12,8 +12,9 @@ class Home extends Component {
         let answeredIds = []
         this.props.questionIds.filter( (questionID) => {
             let question = this.props.questions[questionID]
-            for ( let vote in question.optionOne.votes) {
-                if (question.optionOne.votes[vote] === this.props.authedUser || question.optionTwo.votes[vote]  === this.props.authedUser) {
+            const votesTotal = question.optionOne.votes.concat(question.optionTwo.votes)
+            for (let vote in votesTotal) {
+                if (votesTotal[vote] === this.props.authedUser) {
                     answeredIds.push(questionID)
                 }
             }

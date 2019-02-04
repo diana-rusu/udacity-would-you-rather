@@ -4,9 +4,25 @@ import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class Leader extends Component {
+    calcAnsweredQuestions(user) {
+        let sumAnswered = 0 
+        let sumCreated = 0     
+        Object.values(this.props.questions).map((question) => {
+            if (question.author === user.id) {
+                sumCreated += 1
+            }
+            const votesTotal = question.optionOne.votes.concat(question.optionTwo.votes)
+            for ( let vote in votesTotal) {
+                if (votesTotal[vote] === user.id) {
+                    sumAnswered += 1
+                }
+            }
+        })
+        return {sumAnswered: sumAnswered, sumCreated: sumCreated}
+    }
     render() {
-        const answeredQ = 7
-        const createdQ = 3
+        const answeredQ = this.calcAnsweredQuestions(this.props.user).sumAnswered
+        const createdQ = this.calcAnsweredQuestions(this.props.user).sumCreated
         return (
             <div className='question'>
                 <img src={this.props.user.avatarURL}
