@@ -13,7 +13,6 @@ function addQuestion (question) {
 export function handleAddQuestion (text1) {
     return (dispatch, getState) => {
         const { authedUser } = getState()
-        console.log('authenticated user', authedUser)
         dispatch(showLoading())
         let question = {
             optionOneText: text1,

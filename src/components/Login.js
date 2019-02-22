@@ -13,10 +13,18 @@ class Login extends Component {
         this.state = {
             id: '',
             errors: {},
-            isLoading: false
+            isLoading: false, 
+            users: []
         }
         this.onHandleChange = this.onHandleChange.bind(this)
         this.onClick = this.onClick.bind(this)
+    }
+
+    componentDidMount() {   
+        this.setState({
+            users: Object.keys(this.props.users)
+        })
+
     }
     
 
@@ -27,13 +35,16 @@ class Login extends Component {
         this.props.history.push("/");
     }
     onHandleChange(e) {
-        // this.setState({[e.target.name]: e.target.value});
-        this.setState({id: e.target.innerText});
-        console.log("Set the new state", e.target.innerText)
+        this.setState({id: e.target.value});
     }
     render() {
         const { id, errors, isLoading } = this.state;
-        console.log('You selected:', this.state.id)
+        let defaultUserValue = [<option key="default">select user...</option>]
+        let optionUsers = this.state.users.map((user) =>
+                <option key={user}>{user}</option>
+            );
+        console.log('Userssss:', defaultUserValue.concat(optionUsers))
+        
         return (
             <Card className="text-center">
                 <Card.Header>Would you rather ... </Card.Header>
@@ -42,9 +53,9 @@ class Login extends Component {
                     <Card.Text>
                     You can login by selecting user
                     </Card.Text>
-                    <DropdownButton id="dropdown-item-button" title="Select user">
-                    <Dropdown.Item as="button" onClick={this.onHandleChange}>johndoe</Dropdown.Item>
-                    </DropdownButton>
+                    <select onChange={this.onHandleChange}>
+                        {defaultUserValue.concat(optionUsers)}
+                    </select>
                     <hr />
                     <Button variant="primary" onClick={this.onClick}>Login</Button>
                 </Card.Body>
@@ -60,4 +71,10 @@ Login.propTypes = {
 Login.contextTypes = {
     router: PropTypes.object.isRequired
 }
-export default connect(null, { setAuthedUser })(Login)
+
+function mapStateToProps({users}) {
+    return {
+        users
+    }
+}
+export default connect(mapStateToProps, { setAuthedUser })(Login)

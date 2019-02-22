@@ -32,7 +32,11 @@ class NavComp extends Component {
                 </ul>
                 </Nav>
                 <Nav className="mr-sm-2">
-                {/* Welcome {this.props.authedUser} |  */}
+                {
+                    (this.props.authedUser !== null)
+                    ? <div> Welcome {this.props.authedUser} | </div>
+                    : <div></div>
+                }
                 <NavLink to='/logout'>
                     Logout
                  </NavLink>
