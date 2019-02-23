@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 class ViewPollResults extends Component {
     render() {
         const {
-            author, avatarURL, optionOne, optionTwo
+            author, optionOne, optionTwo
         } = this.props.questions[this.props.match.params.id]
         const option1VotesLength = optionOne.votes.length;
         const option2VotesLength = optionTwo.votes.length;
@@ -17,7 +17,7 @@ class ViewPollResults extends Component {
         const progressInstance2 = <ProgressBar now={now2} label={`${now2}%`} />;
         return (
             <div className='question'>
-            <img src={avatarURL}
+            <img src={this.props.users[author].avatarURL}
             alt={`Avatar of ${author}`}
             className='avatar' 
             />

@@ -22,12 +22,11 @@ class ViewPoll extends Component {
     render() {
         const question = this.props.questions[this.props.match.params.id]
         const {
-            author, avatarURL, timestamp, optionOne, optionTwo
+            author, timestamp, optionOne, optionTwo
         } = this.props.questions[this.props.match.params.id]
-        console.log('ID', this.props.questions[this.props.match.params.id])
         return (
             <div className='question'>
-            <img src={avatarURL}
+            <img src={this.props.users[author].avatarURL}
             alt={`Avatar of ${author}`}
             className='avatar' 
             />

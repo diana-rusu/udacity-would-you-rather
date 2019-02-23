@@ -53,9 +53,9 @@ class Login extends Component {
         
         return (
             <Card className="text-center">
-                <Card.Header>Would you rather ... </Card.Header>
+                <Card.Header>Would you rather game </Card.Header>
                 <Card.Body>
-                    <Card.Title>Login</Card.Title>
+                    <Card.Title>Login to start playing</Card.Title>
                     <Card.Text>
                     You can login by selecting user
                     </Card.Text>

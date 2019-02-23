@@ -24,8 +24,6 @@ class App extends React.Component {
       return (
       <Router>
         <div className="container">
-        {console.log("In APP login", this.props.authedUser)}
-        {/* {this.props.authedUser === null */}
         {localStorage.getItem("token") === null
         ? 
         <Fragment>

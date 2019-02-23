@@ -10,14 +10,12 @@ class NewQuestion extends Component{
     }
     handleChangeText1 = (e) => {
         const text = e.target.value
-        console.log("VALUES", text)
         this.setState(()=>({
             text1: text,
         }))
     }
     handleChangeText2 = (e) => {
         const text = e.target.value
-        console.log("VALUES", text)
         this.setState(()=>({
             text2: text,
         }))
@@ -27,7 +25,6 @@ class NewQuestion extends Component{
         const { text1, text2 } = this.state
         const { dispatch } = this.props
         dispatch(handleAddQuestion(text1, text2))
-        console.log('New Question: ', text1, text2)
         this.setState(() => ({
             text1: '',
             text2: ''
