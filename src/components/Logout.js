@@ -6,6 +6,7 @@ import { removeState } from '../actions/authedUser'
 class Logout extends Component {
     componentWillMount() {
         this.props.dispatch(removeState());
+        localStorage.clear()
       }
     render() {
         return (

@@ -8,7 +8,7 @@ class Leaderboard extends Component {
         return (
             <div>
                 {Object.values(this.props.users).map((user) => {
-                    return ([<div key={user.id}><Leader user={user} />,<br /></div>])
+                    return ([<div key={user.id}><Leader user={user} /><br /></div>])
                 })}
                 
             </div>

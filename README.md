@@ -6,7 +6,7 @@ Would you rather is a project proposed by Udacity as part of React Nanodegree. T
 
 In the app, users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
-## TL;DR
+## How to run the project
 
 To get started:
 
@@ -22,6 +22,7 @@ There is a file [`_DATA.js`](src/_DATA.js) which represents a fake database cont
 There are two types of objects stored in our database:
 
 Users
+
 Questions
 
 ## Create React App

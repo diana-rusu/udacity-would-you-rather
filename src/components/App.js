@@ -9,6 +9,7 @@ import ViewPoll from './ViewPoll'
 import ViewPollResults from './ViewPollResults'
 import Leaderboard from './Leaderboard'
 import PrivateRoute from './PrivateRoute'
+import Handle404 from './Handle404'
 import { BrowserRouter as Router, Route, Redirect, Switch} from 'react-router-dom'
 import NewQuestion from './NewQuestion'
 
@@ -23,7 +24,9 @@ class App extends React.Component {
       return (
       <Router>
         <div className="container">
-        {this.props.loading === true
+        {console.log("In APP login", this.props.authedUser)}
+        {/* {this.props.authedUser === null */}
+        {localStorage.getItem("token") === null
         ? 
         <Fragment>
           <Switch>
@@ -31,22 +34,28 @@ class App extends React.Component {
           {window.location.pathname !== '/login'
           ?
           <Fragment>
-           <Redirect to="/login" />
+           <Redirect to={{
+            pathname: "/login",
+            state: { from: this.props.location }
+          }} />
           </Fragment>
           : null}
           </Switch>
         </Fragment>
-        : <div>
+        : <Fragment>
             <NavComp />
             <br />
+            <Switch>
             <PrivateRoute path='/' exact component={Home} /> 
             <Route path='/login' component={Login} />
-            <PrivateRoute path='/new' component={NewQuestion} />
-            <PrivateRoute  path='/logout' component={Logout} />
-            <PrivateRoute path='/viewpoll/:id' component={ViewPoll} />
-            <PrivateRoute path='/viewpollresults/:id' component={ViewPollResults} />
-            <PrivateRoute path='/leaderboard' component={Leaderboard} />
-          </div> 
+            <PrivateRoute path='/new' exact component={NewQuestion} />
+            <PrivateRoute  path='/logout' exact component={Logout} />
+            <PrivateRoute path='/viewpoll/:id' exact component={ViewPoll} />
+            <PrivateRoute path='/viewpollresults/:id' exact component={ViewPollResults} />
+            <PrivateRoute path='/leaderboard' exact component={Leaderboard} />
+            <Route component={Handle404} />
+            </Switch>
+          </Fragment> 
         }
         </div>
 
@@ -58,7 +67,7 @@ class App extends React.Component {
 
   function mapStateToProps({authedUser}) {
     return {
-      loading: authedUser === null
+      authedUser
     }
   }
   
