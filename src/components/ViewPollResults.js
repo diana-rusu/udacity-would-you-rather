@@ -7,9 +7,8 @@ import { connect } from 'react-redux'
 class ViewPollResults extends Component {
     render() {
         const {
-            author, avatarURL, timestamp, optionOne, optionTwo, id
+            author, avatarURL, optionOne, optionTwo
         } = this.props.questions[this.props.match.params.id]
-        console.log('ID', this.props.questions[this.props.match.params.id])
         const option1VotesLength = optionOne.votes.length;
         const option2VotesLength = optionTwo.votes.length;
         const now1 = (100 * option1VotesLength) / (option1VotesLength + option2VotesLength)

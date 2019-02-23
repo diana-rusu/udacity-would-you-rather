@@ -15,7 +15,6 @@ class ViewPoll extends Component {
         this.props.history.push(`/viewpollresults/${this.props.match.params.id}`);
     }
     toggleCheckboxValue(e) {
-        console.log('selected option', e.target.value)
         this.setState({
             selectedOption: e.target.value
         })

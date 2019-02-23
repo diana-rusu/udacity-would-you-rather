@@ -8,18 +8,26 @@ class NewQuestion extends Component{
         text1: '',
         text2: ''
     }
-    handleChange = (e) => {
+    handleChangeText1 = (e) => {
         const text = e.target.value
+        console.log("VALUES", text)
         this.setState(()=>({
-            text1: text
+            text1: text,
+        }))
+    }
+    handleChangeText2 = (e) => {
+        const text = e.target.value
+        console.log("VALUES", text)
+        this.setState(()=>({
+            text2: text,
         }))
     }
     handleSubmit = (e) => {
         e.preventDefault()
         const { text1, text2 } = this.state
         const { dispatch } = this.props
-        dispatch(handleAddQuestion(text1))
-        console.log('New Question: ', text1)
+        dispatch(handleAddQuestion(text1, text2))
+        console.log('New Question: ', text1, text2)
         this.setState(() => ({
             text1: '',
             text2: ''
@@ -31,12 +39,12 @@ class NewQuestion extends Component{
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group controlId="option1">
                     <Form.Label>Option 1</Form.Label>
-                    <Form.Control value={text1} placeholder="Enter option 1" onChange={this.handleChange} />
+                    <Form.Control value={text1} placeholder="Enter option 1" onChange={this.handleChangeText1} />
                 </Form.Group>
 
                 <Form.Group controlId="option2">
                     <Form.Label>Option 2</Form.Label>
-                    <Form.Control value={text2} placeholder="Enter option 2" onChange={this.handleChange} />
+                    <Form.Control value={text2} placeholder="Enter option 2" onChange={this.handleChangeText2} />
                 </Form.Group>
                 <Button variant="primary" type="submit" disabled={text1 === ''}>
                     Submit

@@ -10,13 +10,13 @@ function addQuestion (question) {
         question
     }
 }
-export function handleAddQuestion (text1) {
+export function handleAddQuestion (text1, text2) {
     return (dispatch, getState) => {
         const { authedUser } = getState()
         dispatch(showLoading())
         let question = {
             optionOneText: text1,
-            optionTwoText: 'diana',
+            optionTwoText: text2,
             author: authedUser
         }
         return _saveQuestion(question)

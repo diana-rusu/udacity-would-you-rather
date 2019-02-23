@@ -10,9 +10,6 @@ class Logout extends Component {
     render() {
         return (
             <Redirect to="/login" />
-            // <div>
-            // {this.props.history.push("/login")}
-            // </div>
         )
     }
 

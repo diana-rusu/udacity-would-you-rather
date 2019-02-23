@@ -20,14 +20,14 @@ class App extends React.Component {
       return (
       <Router>
         <div className='container'>
+        <NavComp />
+        <br />
         {this.props.loading === true
         ? 
         <div>
           <Route path='/login' component={Login} />
         </div>
         : <div>
-          <NavComp />
-          <br />
           <PrivateRoute path='/' exact component={Home} /> 
           <Route path='/login' component={Login} />
           <PrivateRoute path='/new' component={NewQuestion} />
@@ -35,10 +35,8 @@ class App extends React.Component {
           <PrivateRoute path='/viewpoll/:id' component={ViewPoll} />
           <PrivateRoute path='/viewpollresults/:id' component={ViewPollResults} />
           <PrivateRoute path='/leaderboard' component={Leaderboard} />
-          {/* <Route path='/question/:id' component={QuestionPage} />  */}
         </div> 
         }
-        
         </div>
       </Router>
         
@@ -48,8 +46,7 @@ class App extends React.Component {
 
   function mapStateToProps({authedUser}) {
     return {
-      loading: authedUser === null,
-      authedUser
+      loading: authedUser === null
     }
   }
   

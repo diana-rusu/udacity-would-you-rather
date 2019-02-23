@@ -10,7 +10,7 @@ class Home extends Component {
     }
     componentWillMount () {
         let answeredIds = []
-        this.props.questionIds.filter( (questionID) => {
+        this.props.questionIds.filter((questionID) => {
             let question = this.props.questions[questionID]
             const votesTotal = question.optionOne.votes.concat(question.optionTwo.votes)
             for (let vote in votesTotal) {
@@ -18,6 +18,7 @@ class Home extends Component {
                     answeredIds.push(questionID)
                 }
             }
+            return null
         })
         this.setState(() => ({
             answered: answeredIds, 

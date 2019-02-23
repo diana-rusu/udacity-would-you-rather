@@ -40,12 +40,10 @@ class Login extends Component {
         this.setState({id: e.target.value});
     }
     render() {
-        const { id, errors, isLoading } = this.state;
         let defaultUserValue = [<option key="default">select user...</option>]
         let optionUsers = this.state.users.map((user) =>
                 <option key={user}>{user}</option>
             );
-        console.log('Userssss:', defaultUserValue.concat(optionUsers))
         
         return (
             <Card className="text-center">
