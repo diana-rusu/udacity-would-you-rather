@@ -16,6 +16,7 @@ class Leader extends Component {
                     sumAnswered += 1
                 }
             }
+            return null
         })
         return {sumAnswered: sumAnswered, sumCreated: sumCreated}
     }

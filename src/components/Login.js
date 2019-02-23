@@ -33,8 +33,13 @@ class Login extends Component {
     onClick(e) {
         e.preventDefault();
         this.setState({errors: {}, isLoading: true});
-        this.props.setAuthedUser(this.state.id)
-        this.props.history.push("/");
+        if(this.state.id !== "" && this.state.id !== 'select user...'){
+            this.props.setAuthedUser(this.state.id)
+            this.props.history.push("/");
+        } else {
+            this.props.history.push("/login");
+        }
+        
     }
     onHandleChange(e) {
         this.setState({id: e.target.value});

@@ -13,7 +13,7 @@ class Question extends Component {
     render() {
         const { question } = this.props
         const {
-            name, avatar, timestamp, optionOne, optionTwo, id
+            name, avatar, timestamp, optionOne, id
         } = question
         return (
             <div className='question'>
