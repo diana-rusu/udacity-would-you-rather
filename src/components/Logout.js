@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { Redirect } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { removeState } from '../actions/authedUser'
 
 class Logout extends Component {
@@ -10,9 +10,12 @@ class Logout extends Component {
     render() {
         return (
             <Redirect to="/login" />
+            // <div>
+            // {this.props.history.push("/login")}
+            // </div>
         )
     }
 
 }
 
-export default connect()(Logout)
+export default withRouter(connect()(Logout))

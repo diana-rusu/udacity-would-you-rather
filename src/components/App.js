@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux'
-import { handleInitialData } from '../actions/shared'
+import { getInitialUsers, handleInitialData } from '../actions/shared'
 import Home from './Home'
 import Login from './Login'
 import Logout from './Logout'
@@ -8,7 +8,8 @@ import NavComp from './NavComp'
 import ViewPoll from './ViewPoll'
 import ViewPollResults from './ViewPollResults'
 import Leaderboard from './Leaderboard'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import PrivateRoute from './PrivateRoute'
+import { BrowserRouter as Router, Route} from 'react-router-dom'
 import NewQuestion from './NewQuestion'
 
 class App extends React.Component {
@@ -19,20 +20,25 @@ class App extends React.Component {
       return (
       <Router>
         <div className='container'>
-        <NavComp />
-        <br />
-        { this.props.loading === true
-        ? null
+        {this.props.loading === true
+        ? 
+        <div>
+          <Route path='/login' component={Login} />
+        </div>
         : <div>
-          <Route path='/' exact component={Home} /> 
-          <Route path='/login' exact component={Login} />
-          <Route path='/new' component={NewQuestion} />
-          <Route path='/logout' component={Logout} />
-          <Route path='/viewpoll/:id' component={ViewPoll} />
-          <Route path='/viewpollresults/:id' component={ViewPollResults} />
-          <Route path='/leaderboard' component={Leaderboard} />
+          <NavComp />
+          <br />
+          <PrivateRoute path='/' exact component={Home} /> 
+          <Route path='/login' component={Login} />
+          <PrivateRoute path='/new' component={NewQuestion} />
+          <PrivateRoute  path='/logout' component={Logout} />
+          <PrivateRoute path='/viewpoll/:id' component={ViewPoll} />
+          <PrivateRoute path='/viewpollresults/:id' component={ViewPollResults} />
+          <PrivateRoute path='/leaderboard' component={Leaderboard} />
           {/* <Route path='/question/:id' component={QuestionPage} />  */}
-        </div> }
+        </div> 
+        }
+        
         </div>
       </Router>
         
@@ -42,7 +48,8 @@ class App extends React.Component {
 
   function mapStateToProps({authedUser}) {
     return {
-      loading: authedUser === null
+      loading: authedUser === null,
+      authedUser
     }
   }
   

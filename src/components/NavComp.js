@@ -34,12 +34,14 @@ class NavComp extends Component {
                 <Nav className="mr-sm-2">
                 {
                     (this.props.authedUser !== null)
-                    ? <div> Welcome {this.props.authedUser} | </div>
+                    ? <div> Welcome {this.props.authedUser} | 
+                    <NavLink to='/logout'>
+                        Logout
+                    </NavLink>
+                    </div>
                     : <div></div>
                 }
-                <NavLink to='/logout'>
-                    Logout
-                 </NavLink>
+                
                 </Nav>
             </Navbar>
         )

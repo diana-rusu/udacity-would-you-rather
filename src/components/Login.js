@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import Card  from 'react-bootstrap/Card'
 import Button  from 'react-bootstrap/Button'
-import Dropdown  from 'react-bootstrap/Dropdown'
-import { DropdownButton } from 'react-bootstrap'
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser'
 import PropTypes from 'prop-types'
+import { getUsers } from '../utils/api'
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -20,10 +20,12 @@ class Login extends Component {
         this.onClick = this.onClick.bind(this)
     }
 
-    componentDidMount() {   
-        this.setState({
-            users: Object.keys(this.props.users)
-        })
+    componentDidMount() {
+        getUsers().then(users => {
+            this.setState ({
+                users: Object.keys(users['users'])
+            })
+        });   
 
     }
     
@@ -72,9 +74,4 @@ Login.contextTypes = {
     router: PropTypes.object.isRequired
 }
 
-function mapStateToProps({users}) {
-    return {
-        users
-    }
-}
-export default connect(mapStateToProps, { setAuthedUser })(Login)
+export default withRouter(connect(null, { setAuthedUser })(Login))
