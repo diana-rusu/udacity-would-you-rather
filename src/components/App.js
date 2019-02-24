@@ -24,7 +24,7 @@ class App extends React.Component {
       return (
       <Router>
         <div className="container">
-        {localStorage.getItem("token") === null
+        {localStorage.getItem("udacity-would-token") === null
         ? 
         <Fragment>
           <Switch>
@@ -40,7 +40,25 @@ class App extends React.Component {
           : null}
           </Switch>
         </Fragment>
-        : <Fragment>
+        : 
+        localStorage.getItem("udacity-would-token") !== this.props.authedUser
+        ? 
+        <Fragment>
+          <Switch>
+          <Route path='/login' component={Login} />
+          {window.location.pathname !== '/login'
+          ?
+          <Fragment>
+           <Redirect to={{
+            pathname: "/login",
+            state: { from: this.props.location }
+          }} />
+          </Fragment>
+          : null}
+          </Switch>
+        </Fragment>
+        :
+        <Fragment>
             <NavComp />
             <br />
             <Switch>

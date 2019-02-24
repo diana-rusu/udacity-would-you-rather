@@ -35,7 +35,7 @@ class Login extends Component {
         this.setState({errors: {}, isLoading: true});
         if(this.state.id !== "" && this.state.id !== 'select user...'){
             this.props.setAuthedUser(this.state.id)
-            localStorage.setItem("token", this.state.id)
+            localStorage.setItem("udacity-would-token", this.state.id)
             this.props.history.push("/");
         } else {
             this.props.history.push("/login");
