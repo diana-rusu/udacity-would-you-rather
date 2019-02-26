@@ -18,7 +18,7 @@ class NavComp extends Component {
                 </ul>
                 <ul>
                     <li>
-                    <NavLink to='/new'>
+                    <NavLink to='/add'>
                         New Question
                     </NavLink>
                     </li>

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser'
 import PropTypes from 'prop-types'
 import { getUsers } from '../utils/api'
-import { withRouter } from "react-router-dom";
+import { Redirect} from 'react-router-dom'
 
 class Login extends Component {
     constructor(props) {
@@ -14,11 +14,17 @@ class Login extends Component {
             id: '',
             errors: {},
             isLoading: false, 
-            users: []
+            users: [],
+            redirectToReferrer: false
         }
         this.onHandleChange = this.onHandleChange.bind(this)
         this.onClick = this.onClick.bind(this)
     }
+    static propTypes = {
+        match: PropTypes.object.isRequired,
+        location: PropTypes.object.isRequired,
+        history: PropTypes.object.isRequired
+      }
 
     componentDidMount() {
         getUsers().then(users => {
@@ -27,16 +33,14 @@ class Login extends Component {
             })
         });   
 
-    }
-    
+    }  
 
     onClick(e) {
         e.preventDefault();
         this.setState({errors: {}, isLoading: true});
         if(this.state.id !== "" && this.state.id !== 'select user...'){
             this.props.setAuthedUser(this.state.id)
-            localStorage.setItem("udacity-would-token", this.state.id)
-            this.props.history.push("/");
+            this.setState({redirectToReferrer: true});
         } else {
             this.props.history.push("/login");
         }
@@ -50,7 +54,11 @@ class Login extends Component {
         let optionUsers = this.state.users.map((user) =>
                 <option key={user}>{user}</option>
             );
-        
+        const { from } = this.props.location.state || { from: { pathname: '/' } }
+        const { redirectToReferrer } = this.state
+        if (redirectToReferrer === true && {from}.pathname !== '/login') {
+            return <Redirect to={from} />
+        }
         return (
             <Card className="text-center">
                 <Card.Header>Would you rather game </Card.Header>
@@ -78,4 +86,5 @@ Login.contextTypes = {
     router: PropTypes.object.isRequired
 }
 
-export default withRouter(connect(null, { setAuthedUser })(Login))
+
+export default connect(null, { setAuthedUser })(Login)

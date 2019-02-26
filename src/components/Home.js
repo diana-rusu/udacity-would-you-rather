@@ -28,20 +28,20 @@ class Home extends Component {
     render () {
         return (
         <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title="Answered Questions">
+            <Tab eventKey={1} title="Unanswered Questions">
                 <ul>
-                {this.state.answered.map((id) =>(
+                {this.state.unanswered.map((id) =>(
                         <li key={id}>
-                            <Question id={id} />
+                            <Question status={'unanswered'} id={id} />
                         </li>
                     ))}
                 </ul>
             </Tab>
-            <Tab eventKey={2} title="Unanswered Questions">
+            <Tab eventKey={2} title="Answered Questions">
                 <ul>
-                    {this.state.unanswered.map((id) =>(
+                    {this.state.answered.map((id) =>(
                         <li key={id}>
-                            <Question id={id} />
+                            <Question status={'answered'} id={id} />
                         </li>
                     ))}
                 </ul>

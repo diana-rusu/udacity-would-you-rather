@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
+import { Redirect} from 'react-router-dom'
 
 class NewQuestion extends Component{
     state ={
         text1: '',
-        text2: ''
+        text2: '',
+        redirectHome: false
     }
     handleChangeText1 = (e) => {
         const text = e.target.value
@@ -27,26 +29,30 @@ class NewQuestion extends Component{
         dispatch(handleAddQuestion(text1, text2))
         this.setState(() => ({
             text1: '',
-            text2: ''
+            text2: '', 
+            redirectHome: true
         }))
     }
     render() {
         const { text1, text2 } = this.state
+        if (this.state.redirectHome === true) {
+            return <Redirect to='/' />
+        }
         return (
             <Form onSubmit={this.handleSubmit}>
+                <Form.Label>Would you rather ...</Form.Label>
                 <Form.Group controlId="option1">
-                    <Form.Label>Option 1</Form.Label>
                     <Form.Control value={text1} placeholder="Enter option 1" onChange={this.handleChangeText1} />
                 </Form.Group>
-
+                <Form.Label>OR</Form.Label>
                 <Form.Group controlId="option2">
-                    <Form.Label>Option 2</Form.Label>
                     <Form.Control value={text2} placeholder="Enter option 2" onChange={this.handleChangeText2} />
                 </Form.Group>
-                <Button variant="primary" type="submit" disabled={text1 === ''}>
+                <Button variant="primary" type="submit" disabled={text1 === '' || text2 ===''}>
                     Submit
                 </Button>
             </Form>
+            
         )
     }
 }

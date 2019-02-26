@@ -6,9 +6,14 @@ import Button from 'react-bootstrap/Button'
 import { withRouter } from 'react-router-dom'
 
 class Question extends Component {
-    onClick(e, id) {
+    onClick(e, id, status) {
         e.preventDefault();
-        this.props.history.push(`/viewpoll/${id}`);
+        if(status === 'answered'){
+            this.props.history.push(`/viewpollresults/${id}`);
+        }
+        else if(status === 'unanswered'){
+            this.props.history.push(`/viewpoll/${id}`);
+        }
     }
     render() {
         const { question } = this.props
@@ -28,14 +33,14 @@ class Question extends Component {
                     </span>
                     <h3>Would you rather</h3>
                     <div>{optionOne.text}</div>
-                    <Button variant="primary" onClick={(e) => this.onClick(e,id)}>View Poll</Button>
+                    <Button variant="primary" onClick={(e) => this.onClick(e,id, this.props.status)}>View Poll</Button>
                 </div>
             </div>
         )
     }
 }
 
-function mapStateToProps ({authedUser, users, questions}, {id}) {
+function mapStateToProps ({authedUser, users, questions}, {status, id}) {
     const question = questions[id]
     return {
         authedUser,

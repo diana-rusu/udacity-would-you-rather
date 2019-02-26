@@ -45,9 +45,8 @@ class ViewPollResults extends Component {
         )
     }
 }
-function mapStateToProps ({authedUser, users, questions}) {
+function mapStateToProps ({users, questions}) {
     return {
-        authedUser,
         questions,
         users
     }
