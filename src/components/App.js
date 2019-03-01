@@ -26,7 +26,7 @@ class App extends React.Component {
             <br />
             <Switch>
             <Route path='/login' component={Login} />
-            <PrivateRoute path='/' exact={true} component={Home} /> 
+            <PrivateRoute path='/' exact component={Home} /> 
             <PrivateRoute path='/add' exact component={NewQuestion} />
             <PrivateRoute path='/logout' exact component={Logout} />
             <PrivateRoute path='/viewpoll/:id' exact component={ViewPoll} />

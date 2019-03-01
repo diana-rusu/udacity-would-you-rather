@@ -11,7 +11,7 @@ class NavComp extends Component {
                 <Nav className="mr-auto">
                 <ul>
                     <li>
-                    <NavLink to='/' exact activeClassName='active'>
+                    <NavLink to='/'>
                         Home
                     </NavLink>
                     </li>

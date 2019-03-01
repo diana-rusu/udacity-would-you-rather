@@ -1,8 +1,10 @@
 import { _saveQuestion } from '../utils/_DATA'
 import { showLoading, hideLoading } from 'react-redux-loading'
+import { hashHistory } from 'react-router'
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
+
 
 function addQuestion (question) {
     return {

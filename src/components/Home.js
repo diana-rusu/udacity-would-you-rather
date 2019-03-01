@@ -2,13 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Tabs, Tab } from 'react-bootstrap';
 import Question from './Question'
+import { withRouter } from "react-router-dom";
 
 class Home extends Component {
-    state = {
-        answered: null,
-        unanswered: null
-    }
-    componentWillMount () {
+    renderQuestions() {
         let answeredIds = []
         this.props.questionIds.filter((questionID) => {
             let question = this.props.questions[questionID]
@@ -18,36 +15,35 @@ class Home extends Component {
                     answeredIds.push(questionID)
                 }
             }
-            return null
         })
-        this.setState(() => ({
-            answered: answeredIds, 
-            unanswered: this.props.questionIds.filter(f => !answeredIds.includes(f))
-        }))
-    }
-    render () {
+        let unanswered = this.props.questionIds.filter(f => !answeredIds.includes(f))
         return (
-        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title="Unanswered Questions">
-                <ul>
-                {this.state.unanswered.map((id) =>(
-                        <li key={id}>
-                            <Question status={'unanswered'} id={id} />
-                        </li>
-                    ))}
-                </ul>
-            </Tab>
-            <Tab eventKey={2} title="Answered Questions">
-                <ul>
-                    {this.state.answered.map((id) =>(
-                        <li key={id}>
-                            <Question status={'answered'} id={id} />
-                        </li>
-                    ))}
-                </ul>
-            </Tab>
-        </Tabs>
+            <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                <Tab eventKey={1} title="Unanswered Questions">
+                    <ul>
+                    {unanswered.map((id) =>(
+                            <li key={id}>
+                                <Question status={'unanswered'} id={id} />
+                            </li>
+                        ))}
+                    </ul>
+                </Tab>
+                <Tab eventKey={2} title="Answered Questions">
+                    <ul>
+                        {answeredIds.map((id) =>(
+                            <li key={id}>
+                                <Question status={'answered'} id={id} />
+                            </li>
+                        ))}
+                    </ul>
+                </Tab>
+            </Tabs>
         )
+        
+    }
+
+    render () {
+        return <div>{this.renderQuestions()}</div>
     }
 }
 
@@ -60,4 +56,4 @@ function mapStateToProps ({authedUser, questions}) {
     }
 }
 
-export default connect(mapStateToProps)(Home)
+export default withRouter(connect(mapStateToProps)(Home))

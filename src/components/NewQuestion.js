@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
+
 import { Redirect} from 'react-router-dom'
 
 class NewQuestion extends Component{
@@ -25,8 +26,7 @@ class NewQuestion extends Component{
     handleSubmit = (e) => {
         e.preventDefault()
         const { text1, text2 } = this.state
-        const { dispatch } = this.props
-        dispatch(handleAddQuestion(text1, text2))
+        this.props.handleAddQuestion(text1, text2)
         this.setState(() => ({
             text1: '',
             text2: '', 
@@ -35,10 +35,8 @@ class NewQuestion extends Component{
     }
     render() {
         const { text1, text2 } = this.state
-        if (this.state.redirectHome === true) {
-            return <Redirect to='/' />
-        }
         return (
+            <div>
             <Form onSubmit={this.handleSubmit}>
                 <Form.Label>Would you rather ...</Form.Label>
                 <Form.Group controlId="option1">
@@ -52,6 +50,10 @@ class NewQuestion extends Component{
                     Submit
                 </Button>
             </Form>
+            {this.state.redirectHome === true
+            ?<Redirect to='/' />
+            : null}
+            </div>
             
         )
     }
@@ -63,4 +65,4 @@ function mapStateToProps({authedUser}) {
     }
 }
 
-export default connect(mapStateToProps)(NewQuestion)
+export default connect(mapStateToProps, {handleAddQuestion})(NewQuestion)

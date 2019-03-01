@@ -8,10 +8,9 @@ export default function user (state = {}, action) {
             ...action.questions
         }
         case ADD_QUESTION:
-            const { question } = action
         return {
             ...state,
-            [action.question.id] : question
+            [action.question.id]: action.question
         }
         default:
         return state
