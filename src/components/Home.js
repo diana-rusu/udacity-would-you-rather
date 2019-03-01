@@ -15,6 +15,7 @@ class Home extends Component {
                     answeredIds.push(questionID)
                 }
             }
+            return null
         })
         let unanswered = this.props.questionIds.filter(f => !answeredIds.includes(f))
         return (
